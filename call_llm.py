@@ -13,8 +13,8 @@ class LLM:
         self.stream = stream
 
     def __call__(self,msgs=None,roles=['user'],*args):
-        assert msgs is not None or args is not None, "You must input msg-role pair in form of str or list of dict."
-        if msgs is not None and args is not None:
+        assert msgs is not None or len(args)!=0, "You must input msg-role pair in form of str or list of dict."
+        if msgs is not None and len(args) != 0:
             raise RuntimeError("One form of input at a time.")
         if msgs is not None :
             if isinstance(msgs,str):
@@ -38,3 +38,8 @@ class LLM:
         for message in args:
             if 'role' not in message or 'message' not in message:
                 raise RuntimeError("Invalid input form")
+            
+if __name__ == "__main__":
+    llm = LLM(api_key="sk-jIX3lMObPh1Rbu44Bb2dEeD7347a4998A2E095Ee208cA108",api_base = "https://vip-hk-s1.zeabur.app/v1")
+    response,_ = llm("hello")
+    print(response)
