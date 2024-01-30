@@ -77,7 +77,7 @@ class Retrieval():
 
 def test_retireval():
     key_word = "留学"
-    data_path = "toy_dataset.json"
+    data_path = "data/toy_dataset.json"
     retrieval = Retrieval(key_word, data_path)
     content = retrieval.keyword_retrieval()
     print(content)
