@@ -84,7 +84,7 @@ class tokenizer:
     def tokenize(self,t : str):
 
         embeddings = self.llm.get_embeddings(t)
-        embeddings = np.array(embeddings).expand_dims(0)
+        embeddings = np.expand_dims(np.array(embeddings),axis=0)
         return embeddings
     
 
@@ -108,7 +108,7 @@ def main():
     content,keyword,title = read_raw_data(args.path)
 
     embedding_transformer = tokenizer('config/openai/openai.yaml')
-    embeddings = embedding_transformer(content,keyword,title)
+    embeddings = embedding_transformer(content[0],keyword[0],title[0])
     outlines = embedding_transformer.export_outlines()
 
     root, file_name= osp.split(args.path)

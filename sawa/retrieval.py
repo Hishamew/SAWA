@@ -37,7 +37,7 @@ class Retrieval():
         outline = self.write_outlines()
 
         user_embeddings = self.llm.get_embeddings(outline)
-        user_embeddings = np.array(user_embeddings).expand_dims(0)
+        user_embeddings = np.expand_dims(np.array(user_embeddings),axis=0)
         document_embeddings = self.read_embeddings()
         # 计算用户查询与所有文档之间的余弦相似度
         similarities = cosine_similarity(user_embeddings, document_embeddings)
