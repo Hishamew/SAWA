@@ -5,20 +5,88 @@
 
 import tqdm
 import argparse
-from typing import Sequence,Union
+import yaml
 import os.path as osp
+from typing import Sequence,Union
+from collections import OrderedDict
 
 import pandas as pd
 import torch
 from transformers import BertTokenizer, BertModel
 
+from sawa.prompt import OutlinePrompt,RedBookEditorPrompt
+from sawa import build_llm_from_config
+
 def read_raw_data(path : str):
 
     f = pd.read_csv(path)
     contents = list(f['contents'])
+    keywords = list(f['keyword'])
+    titles = list(f['title'])
 
-    return contents
+    return contents,keywords,titles
 
+
+class tokenizer:
+    def __init__(self,config):
+
+        sys_prompt = RedBookEditorPrompt("现在你需要整理一些别人网红笔记的资料，请根据以下有关网红笔记的信息生成它们的大纲。")
+        self.llm = build_llm_from_config(config = config, 
+                                         sys_prompt= sys_prompt())
+    
+    def __call__(self,text: Union[Sequence[str],str],keyword : Union[Sequence[str],str],title : Union[Sequence[str],str]):
+        '''
+        Tokenize text.
+        Args:
+            text: take str or list of str and return their embeddings
+            keyword (str or list[str]): their keyword.
+            title (str or list[str]): their title.
+        
+        Returns:
+            torch.Tensor : their embeddings.
+        '''
+
+        print('Generating outlines.')
+        outlines = self.get_outline(text,keyword,title)
+        self.outlines = outlines
+
+        print('Generating embeddings.')
+        if isinstance(outlines,str):
+
+            return self.tokenize(outlines)
+        
+        else:
+
+            represents = []
+            for t in tqdm.tqdm(outlines):
+                represent = self.tokenize(t)
+                represents.append(represent)
+            
+            return torch.cat(represents)
+            
+    def get_outline(self,text,keyword,title):
+        Prompter = OutlinePrompt()
+        if isinstance(text,str):
+            prompt = Prompter(text,title,keyword)
+            return self.llm(prompt,use_history=False)
+        else:
+            outlines=[]
+            for t,k,l in tqdm.tqdm(list(zip(text,keyword,title))):
+                prompt = Prompter(t,l,k)
+                outlines.append(self.llm(prompt,use_history=False))
+            return outlines
+
+    def export_outlines(self):
+        return self.outlines
+
+
+
+    def tokenize(self,t : str):
+
+        embeddings = self.llm.get_embeddings(t)
+        embeddings = torch.tensor(embeddings).unsqueeze(0)
+        return embeddings
+    
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -26,47 +94,7 @@ def parse_args():
 
     args = parser.parse_args()
 
-    return args
-
-class tokenizer:
-    def __init__(self):
-
-        self.tokenizer = BertTokenizer.from_pretrained("google-bert/bert-base-chinese")
-        self.model = BertModel.from_pretrained("google-bert/bert-base-chinese")
-        self.device = "cuda:0" if torch.cuda.is_available() else 'cpu'
-        self.tokenizer = self.tokenizer.to(self.device)
-        self.model = self.model.to(self.device)
-    
-    def __call__(self,text: Union[Sequence[str],str]):
-        '''
-        
-        text: take str or list of str and return there
-
-        '''
-        
-        
-
-        if isinstance(text,str):
-
-            return self.tokenize(text)
-        
-        else:
-
-            represents = []
-            for t in tqdm.tqdm(text):
-                represent = self.tokenize(t)
-                represents.append(represent)
-            
-            return torch.cat(represents)
-            
-
-    def tokenize(self,t : str):
-
-        token = self.tokenizer(t,return_tensors='pt',padding=True,truncation=True)
-        represents = self.model(**token)
-        represents = represents.last_hidden_state.mean(dim=1)    
-        return represents   
-        
+    return args     
 
 def main():
 
@@ -77,14 +105,21 @@ def main():
     #     data = json.load(file)
     # content = [item['note_content'] for item in data]
 
-    content = read_raw_data(args.path)
+    content,keyword,title = read_raw_data(args.path)
 
-    embedding_transformer = tokenizer()
-    embeddings = embedding_transformer(content)
+    embedding_transformer = tokenizer('config/openai.yaml')
+    embeddings = embedding_transformer(content,keyword,title)
+    outlines = embedding_transformer.export_outlines()
 
     root, file_name= osp.split(args.path)
 
-    torch.save(embeddings,osp.join(root,file_name[:-3]+'pth'))
+    outline_embeddings_map = OrderedDict()
+    for key,value in zip(outlines,embeddings):
+        outline_embeddings_map[key] = value
+
+    torch.save(outline_embeddings_map,osp.join(root,file_name[:-3]+'pth'))
+
+    
 
 if __name__ == "__main__":
     main()

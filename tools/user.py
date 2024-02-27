@@ -1,7 +1,7 @@
 import argparse
-from utils.retrieval import Retrieval
-from utils.prompt import Prompt
-from utils.call_llm import LLM
+from sawa.retrieval import Retrieval
+from sawa.prompt import Prompt
+from sawa.llm import LLM
 def main(args):
     data_path = "data/toy_dataset.json"
     retrieval = Retrieval(args.keyword, data_path)
