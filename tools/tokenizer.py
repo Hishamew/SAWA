@@ -107,7 +107,7 @@ def main():
 
     content,keyword,title = read_raw_data(args.path)
 
-    embedding_transformer = tokenizer('config/openai.yaml')
+    embedding_transformer = tokenizer('config/openai/openai.yaml')
     embeddings = embedding_transformer(content,keyword,title)
     outlines = embedding_transformer.export_outlines()
 
