@@ -11,7 +11,7 @@ from typing import Sequence,Union
 from collections import OrderedDict
 
 import pandas as pd
-import torch
+import numpy as np
 from transformers import BertTokenizer, BertModel
 
 from sawa.prompt import OutlinePrompt,RedBookEditorPrompt
@@ -43,7 +43,7 @@ class tokenizer:
             title (str or list[str]): their title.
         
         Returns:
-            torch.Tensor : their embeddings.
+            numpy.array : their embeddings.
         '''
 
         print('Generating outlines.')
@@ -62,7 +62,7 @@ class tokenizer:
                 represent = self.tokenize(t)
                 represents.append(represent)
             
-            return torch.cat(represents)
+            return np.concatenate(represents)
             
     def get_outline(self,text,keyword,title):
         Prompter = OutlinePrompt()
@@ -84,7 +84,7 @@ class tokenizer:
     def tokenize(self,t : str):
 
         embeddings = self.llm.get_embeddings(t)
-        embeddings = torch.tensor(embeddings).unsqueeze(0)
+        embeddings = np.array(embeddings).expand_dims(0)
         return embeddings
     
 
@@ -117,7 +117,7 @@ def main():
     for key,value in zip(outlines,embeddings):
         outline_embeddings_map[key] = value
 
-    torch.save(outline_embeddings_map,osp.join(root,file_name[:-3]+'pth'))
+    np.save(osp.join(root,file_name[:-3]+'npy'),outline_embeddings_map)
 
     
 

@@ -5,7 +5,7 @@
 # Author: zht
 # 2024.2.27 v0.0.2 
 # For semantic retrieval, we need download BERT models: “bert-base-uncased”/“bert-large-uncased” from huggingface
-import torch
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from .llm import build_llm_from_config
@@ -28,7 +28,7 @@ class Retrieval():
     def __init__(self, user_query, embeddings_path,config
                  ):
         self.user_query = user_query
-        self.embeddings = torch.load(embeddings_path)
+        self.embeddings = np.load(embeddings_path,allow_pickle = True)
         self.llm = build_llm_from_config(config,sys_prompt=RedBookEditorPrompt("现在需要你帮忙根据要求撰写一篇小红书的大纲。"))
 
 
@@ -37,7 +37,7 @@ class Retrieval():
         outline = self.write_outlines()
 
         user_embeddings = self.llm.get_embeddings(outline)
-        user_embeddings = torch.tensor(user_embeddings).unsqueeze(0)
+        user_embeddings = np.array(user_embeddings).expand_dims(0)
         document_embeddings = self.read_embeddings()
         # 计算用户查询与所有文档之间的余弦相似度
         similarities = cosine_similarity(user_embeddings, document_embeddings)
@@ -64,7 +64,7 @@ class Retrieval():
         for value in embeddings_map.values():
             embeddings.append(value)
         
-        return torch.cat(embeddings)
+        return np.concatenate(embeddings)
  
 def build_retrieval(user_query, embeddings_path,config):
     return Retrieval(user_query, embeddings_path,config)
