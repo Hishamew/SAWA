@@ -7,7 +7,7 @@ import pandas as pd
 
 from .llm import build_llm_from_config
 from .retrieval import build_retrieval
-from .prompt import RedBookEditorPrompt
+from .prompt import RedBookEditorPrompt,WritePrompt
 
 class Writer:
     def __init__(self,
@@ -35,6 +35,11 @@ class Writer:
         info['user_query'] = self.user_query
         info['user_outline'] = outline
 
-        prompter = 
+        prompter = WritePrompt()
+        prompt = prompter(**info)
+        
+        article = self.llm(prompt)
+
+        return article
         
 
