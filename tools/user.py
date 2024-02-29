@@ -1,21 +1,35 @@
 import argparse
-from sawa.retrieval import Retrieval
-from sawa.prompt import Prompt
-from sawa.llm import LLM
-def main(args):
-    data_path = "data/toy_dataset.json"
-    retrieval = Retrieval(args.keyword, data_path)
-    example = retrieval.keyword_retrieval()
-    prompt = Prompt(example, args.keyword)
-    output = LLM(prompt)
-    with open(args.output_path, "w", encoding='utf-8') as f:
-        f.write(str(output))
-        f.close()
+import yaml
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--keyword", type=str, default="留学")
-    parser.add_argument("--output_path", type=str, default="./output.txt")
+from sawa import build_writer
+
+def parse_args():
+    parser = argparse.ArgumentParser(description = "a simple demo to use sawa")
+
+    parser.add_argument("user_query",
+                        type = str, 
+                        help = "User demande on redbook article.")
+    parser.add_argument("--config",default="config/sawa.yaml",
+                        type = str,
+                        help = "System config. Not Implemented by user.")
+
     args = parser.parse_args()
 
-    main(args)
+    return args
+
+
+def main():
+    args = parse_args()
+
+    with open(args.config,'r') as f:
+        config = yaml.safe_load(f)
+    
+    writer = build_writer(**config,user_query = args.user_query)
+    article = writer.write()
+    print(article)
+
+
+
+if __name__ == "__main__":
+
+    main()

@@ -15,31 +15,39 @@ class Writer:
                  dataset_path,
                  embeddings_path,
                  user_query):
-        prompter = RedBookEditorPrompt("请根据提供的信息生成一篇小红书文案。")
-        self.llm = build_llm_from_config(openai_config_path,sys_prompt=prompter())
-        self.retrieval = build_retrieval(user_query,embeddings_path,openai_config_path)
+        self.llm = build_llm_from_config(openai_config_path,sys_prompter=RedBookEditorPrompt("请协助我完成一系列任务从而完成一篇小红书文案。"))
+        self.retrieval = build_retrieval(user_query,embeddings_path,self.llm)
         self.dataset_path = dataset_path
         self.user_query = user_query
 
     def retrieve(self):
+        print("Doing semantic retrieval.")
         return self.retrieval.semantic_retrieval()
     
     def write(self):
+
         f = pd.read_csv(self.dataset_path)
-        matched_outline, index, outline = self.retrieve()
-        info = {}
+        info = self.retrieve()
+        index = info.pop('most_similar_document_index')
+        
         for item in f.columns:
             info[item] = f[item][index]
 
-        info['matched_outline'] = matched_outline
         info['user_query'] = self.user_query
-        info['user_outline'] = outline
 
         prompter = WritePrompt()
         prompt = prompter(**info)
         
+        print("Writing article.")
         article = self.llm(prompt)
 
         return article
+    
+def build_writer(openai_config_path,dataset_path,embeddings_path,user_query):
+    return Writer(openai_config_path,
+                  dataset_path,
+                  embeddings_path,
+                  user_query
+                  )
         
 

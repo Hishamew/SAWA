@@ -84,9 +84,10 @@ class LLM:
         return self.history
 
 
-def build_llm_from_config(config,sys_prompt):
+def build_llm_from_config(config,sys_prompter):
     with open(config,'r') as f:
         cfg = yaml.safe_load(f)
+    sys_prompt = sys_prompter()
     llm = LLM(**cfg,sys_prompt=sys_prompt)
     return llm
     

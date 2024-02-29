@@ -1,6 +1,6 @@
 openai
 pyyaml
 pandas
-sklearn
+scikit-learn
 transformers
 numpy

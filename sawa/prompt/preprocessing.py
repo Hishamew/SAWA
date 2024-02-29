@@ -21,6 +21,8 @@ class OutlinePrompt(Prompt):
         
         prompt += f'这篇小红书的题目是{title}。它的正文内容如下：{content}。另外这是这篇文章相关的关键词或标签：{keywords}。'
 
+        prompt += '仅输出大纲即可，无需给出任何的补充说明。'
+
         return prompt
 
 class WriteOutlinePrompt(Prompt):
@@ -28,7 +30,7 @@ class WriteOutlinePrompt(Prompt):
         super().__init__()
 
     def format(self,requires):
-        prompt = "请根据以下要求生成一个小红书的大纲。"
+        prompt = "请根据以下要求生成一个小红书的大纲。仅输出大纲即可，无需给出任何的补充说明。"
 
         prompt += requires
 

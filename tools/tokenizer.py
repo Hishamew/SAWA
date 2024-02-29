@@ -73,7 +73,11 @@ class tokenizer:
             outlines=[]
             for t,k,l in tqdm.tqdm(list(zip(text,keyword,title))):
                 prompt = Prompter(t,l,k)
-                outlines.append(self.llm(prompt,use_history=False))
+                try:
+                    outlines.append(self.llm(prompt,use_history=False))
+                except Exception as e:
+                    raise RuntimeError(f"Failed to generate outline due to {e}")
+                
             return outlines
 
     def export_outlines(self):
@@ -108,7 +112,7 @@ def main():
     content,keyword,title = read_raw_data(args.path)
 
     embedding_transformer = tokenizer('config/openai/openai.yaml')
-    embeddings = embedding_transformer(content[0],keyword[0],title[0])
+    embeddings = embedding_transformer(content,keyword,title)
     outlines = embedding_transformer.export_outlines()
 
     root, file_name= osp.split(args.path)
