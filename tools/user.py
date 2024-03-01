@@ -1,6 +1,5 @@
 import argparse
 import yaml
-
 from sawa import build_writer
 
 def parse_args():
@@ -24,9 +23,9 @@ def main():
     with open(args.config,'r') as f:
         config = yaml.safe_load(f)
     
-    writer = build_writer(**config,user_query = args.user_query)
-    article = writer.write()
-    print(article)
+    writer = build_writer(user_query = args.user_query, **config)
+    article = writer()
+    print(article())
 
 
 

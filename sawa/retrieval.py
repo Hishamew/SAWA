@@ -70,8 +70,8 @@ class Retrieval():
         
         return np.concatenate(embeddings)
  
-def build_retrieval(user_query, embeddings_path,llm):
-    return Retrieval(user_query, embeddings_path,llm)
+# def build_retrieval(user_query, embeddings_path,llm):
+#     return Retrieval(user_query, embeddings_path,llm)
 
 # def test_retireval():
 #     key_word = "留学"
