@@ -24,7 +24,10 @@ class Retrieval():
     data
 
     '''
-    def __init__(self, user_query, embeddings_path,llm
+    def __init__(self, 
+                 user_query, 
+                 embeddings_path,
+                 llm,
                  ):
         self.user_query = user_query
         self.embeddings = np.load(embeddings_path,allow_pickle = True).item()
@@ -70,3 +73,7 @@ class Retrieval():
         
         return np.concatenate(embeddings)
  
+def build_retrieval(user_query, embeddings_path, llm):
+    return Retrieval(user_query=user_query,
+                     embeddings_path=embeddings_path,
+                     llm=llm)

@@ -6,7 +6,7 @@
 import pandas as pd
 
 from .llm import build_llm_from_config
-from .retrieval import Retrieval
+from .retrieval import build_retrieval
 from .prompt import RedBookEditorPrompt,WritePrompt
 
 class Writer:
@@ -17,7 +17,7 @@ class Writer:
                  embeddings_path = 'data/sawa_data_1.npy',
                  ):
         self.llm = build_llm_from_config(openai_config_path, sys_prompter=RedBookEditorPrompt("请协助我完成一系列任务从而完成一篇小红书文案。"))
-        self.retrieval = Retrieval(user_query,embeddings_path,self.llm)
+        self.retrieval = build_retrieval(user_query,embeddings_path,self.llm)
         self.dataset_path = dataset_path
         self.user_query = user_query
 
@@ -25,7 +25,7 @@ class Writer:
         print("Doing semantic retrieval.")
         return self.retrieval.semantic_retrieval()
     
-    def __call__(self):
+    def write(self):
 
         f = pd.read_csv(self.dataset_path)
         info = self.retrieve()
@@ -43,3 +43,12 @@ class Writer:
         article = self.llm(prompt)
 
         return article
+    
+def build_writer(user_query,
+                 openai_config_path,
+                 dataset_path,
+                 embeddings_path):
+    return Writer(user_query=user_query,
+                  openai_config_path=openai_config_path,
+                  dataset_path=dataset_path,
+                  embeddings_path=embeddings_path)

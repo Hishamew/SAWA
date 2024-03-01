@@ -84,9 +84,12 @@ class LLM:
         return self.history
 
 
-def build_llm_from_config(config,sys_prompter):
+def build_llm_from_config(config,sys_prompter=None):
     with open(config,'r') as f:
         cfg = yaml.safe_load(f)
+    if sys_prompter == None : 
+        llm = LLM(**cfg)
+        return llm
     sys_prompt = sys_prompter()
     llm = LLM(**cfg,sys_prompt=sys_prompt)
     return llm
@@ -94,11 +97,8 @@ def build_llm_from_config(config,sys_prompter):
 
             
 if __name__ == "__main__":
+    llm = build_llm_from_config(config='config/openai/openai.yaml')
 
-    
-    llm = build_llm_from_config(config='config/openai.yaml',
-                                sys_prompt="你是一个私人助理，请你根据指令帮助我完成我的工作。\n\n")
-
-    response = llm("请用法语翻译以下这段话，尽量做到用书面语：我想请问是否仅需要参加考试，还是需要出席课堂和做作业呢？")
+    response = llm("请帮我写一封给mariem.kacem.boureau的邮件，告诉他/她我要重修l'introduction à Corpo. Finance和量子力学。用法语书写。篇幅简短，意思明确。")
     print(response)
     
