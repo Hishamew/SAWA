@@ -16,7 +16,7 @@ class Writer:
                  dataset_path = 'data/sawa_data_1.csv',
                  embeddings_path = 'data/sawa_data_1.npy',
                  ):
-        self.llm = build_llm_from_config(openai_config_path,sys_prompter=RedBookEditorPrompt("请协助我完成一系列任务从而完成一篇小红书文案。"))
+        self.llm = build_llm_from_config(openai_config_path, sys_prompter=RedBookEditorPrompt("请协助我完成一系列任务从而完成一篇小红书文案。"))
         self.retrieval = Retrieval(user_query,embeddings_path,self.llm)
         self.dataset_path = dataset_path
         self.user_query = user_query
@@ -43,8 +43,3 @@ class Writer:
         article = self.llm(prompt)
 
         return article
-    
-def build_writer(user_query):
-    return Writer(user_query)
-        
-

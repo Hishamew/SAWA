@@ -9,7 +9,11 @@ An AI agents system to generate LRB article
 pip install -r requirements.txt
 pip install -v -e .
 ```
-
+## Gradio Demo
+本地运行gradio
+```shell
+python tools\gradio_demo.py
+```
 
 ## Prepare
 

@@ -1,6 +1,6 @@
 import argparse
 import yaml
-from sawa import build_writer
+from sawa import Writer
 
 def parse_args():
     parser = argparse.ArgumentParser(description = "a simple demo to use sawa")
@@ -23,9 +23,9 @@ def main():
     with open(args.config,'r') as f:
         config = yaml.safe_load(f)
     
-    writer = build_writer(user_query = args.user_query, **config)
+    writer = Writer(user_query = args.user_query, **config)
     article = writer()
-    print(article())
+    print(article)
 
 
 
