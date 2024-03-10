@@ -7,9 +7,6 @@
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from .llm import build_llm_from_config
-from .prompt import RedBookEditorPrompt,WriteOutlinePrompt
-
 def argmax(list,key = None):
     max_value = max(list,key = key)
     return [index for index,_ in enumerate(list) if list[index] == max_value]
@@ -36,9 +33,7 @@ class Retrieval():
 
     def semantic_retrieval(self):
 
-        outline = self.write_outlines()
-
-        user_embeddings = self.llm.get_embeddings(outline)
+        user_embeddings = self.llm.get_embeddings(self.user_query)
         user_embeddings = np.expand_dims(np.array(user_embeddings),axis=0)
         document_embeddings = self.read_embeddings()
         # 计算用户查询与所有文档之间的余弦相似度
@@ -50,19 +45,9 @@ class Retrieval():
 
         outline_matched = embeddings_map_list[most_similar_document_index][0]
 
-        results = dict(matched_outline = outline_matched,most_similar_document_index = most_similar_document_index,user_outline = outline)
+        results = dict(matched_outline = outline_matched,most_similar_document_index = most_similar_document_index)
         
         return results
-
-    def write_outlines(self):
-        
-        prompter = WriteOutlinePrompt()
-        print("Writing outline")
-        outline = self.llm(prompter(self.user_query))
-        print("Outline generated :")
-        print(outline)
-
-        return outline
         
 
     def read_embeddings(self):

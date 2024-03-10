@@ -36,13 +36,15 @@ class Writer:
 
         info['user_query'] = self.user_query
 
+        most_similar_article = info['content']
+
         prompter = WritePrompt()
         prompt = prompter(**info)
         
         print("Writing article.")
         article = self.llm(prompt)
 
-        return article
+        return most_similar_article,article
     
 def build_writer(user_query,
                  openai_config_path,
