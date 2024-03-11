@@ -94,11 +94,10 @@ def build_llm_from_config(config,sys_prompter=None):
     llm = LLM(**cfg,sys_prompt=sys_prompt)
     return llm
     
+# # test llm code:            
+# if __name__ == "__main__":
+#     llm = build_llm_from_config(config='config/openai/openai.yaml')
 
-            
-if __name__ == "__main__":
-    llm = build_llm_from_config(config='config/openai/openai.yaml')
-
-    response = llm("请帮我写一封给mariem.kacem.boureau的邮件，告诉他/她我要重修l'introduction à Corpo. Finance和量子力学。用法语书写。篇幅简短，意思明确。")
-    print(response)
+#     response = llm("请帮我写一封给mariem.kacem.boureau的邮件，告诉他/她我要重修l'introduction à Corpo. Finance和量子力学。用法语书写。篇幅简短，意思明确。")
+#     print(response)
     

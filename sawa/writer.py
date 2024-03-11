@@ -36,7 +36,7 @@ class Writer:
 
         info['user_query'] = self.user_query
 
-        most_similar_article = info['content']
+        most_similar_article = info['contents']
 
         prompter = WritePrompt()
         prompt = prompter(**info)

@@ -18,7 +18,7 @@ with open(config_path,'r') as file:
 def xhs_writer(user_query):
     data = pd.read_csv(cfg['dataset_path'])
     llm = build_llm_from_config(cfg['openai_config_path'], 
-                                sys_prompter=RedBookEditorPrompt("请协助我完成一系列任务从而完成一篇小红书文案。"))
+                                sys_prompter=RedBookEditorPrompt(""))
     retriever = Retrieval(user_query, cfg['embeddings_path'], llm)
     info = retriever.semantic_retrieval()
     index = info.pop('most_similar_document_index')
