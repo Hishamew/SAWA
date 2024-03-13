@@ -5,6 +5,7 @@
 # Author: zht
 # 2024.2.27 v0.0.2 : Now use openai as embeddings_transformers
 import numpy as np
+import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 def argmax(list,key = None):
@@ -24,10 +25,12 @@ class Retrieval():
     def __init__(self, 
                  user_query, 
                  embeddings_path,
+                 dataset_path,
                  llm,
                  ):
         self.user_query = user_query
-        self.embeddings = np.load(embeddings_path,allow_pickle = True).item()
+        self.embeddings_path = embeddings_path
+        self.dataset_path = dataset_path
         self.llm = llm
 
 
@@ -41,24 +44,56 @@ class Retrieval():
         # 查找最相似文档的索引
         most_similar_document_index = similarities.argmax()
 
-        embeddings_map_list = list(self.embeddings.items())
+        for dataset_index,dataset_size in enumerate(self.dataset_len):
+            if most_similar_document_index+1 <= dataset_size:
+                break
+            most_similar_document_index -= dataset_size
 
-        outline_matched = embeddings_map_list[most_similar_document_index][0]
+        embeddings_key_list = list(self.embeddings_maps[dataset_index].keys())
 
-        results = dict(matched_outline = outline_matched,most_similar_document_index = most_similar_document_index)
+        outline_matched = embeddings_key_list[most_similar_document_index]
+
+        results = dict(matched_outline = outline_matched,most_similar_document_index = most_similar_document_index,dataset_index = dataset_index)
+
+        results = self.find_all_needed_info(results)
         
         return results
         
 
     def read_embeddings(self):
-        embeddings_map = self.embeddings
+
+        self.embeddings_maps = [np.load(embedding_path,allow_pickle = True).item() for embedding_path in self.embeddings_path]
+        self.dataset_len = [len(embeddings_map) for embeddings_map in self.embeddings_maps]
+
         embeddings = []
-        for value in embeddings_map.values():
-            embeddings.append(np.expand_dims(value,axis=0))
+        for embeddings_map in self.embeddings_maps:
+            for value in embeddings_map.values():
+                embeddings.append(np.expand_dims(value,axis=0))
         
         return np.concatenate(embeddings)
+    
+    def find_all_needed_info(self,semantic_results):
+
+        results = semantic_results
+        most_similar_document_index = semantic_results.pop('most_similar_document_index')
+        dataset_index = semantic_results.pop('dataset_index')
+
+        f = pd.read_csv(self.dataset_path[dataset_index])
+
+        for item in f.columns:
+            results[item] = f[item][most_similar_document_index]
+        
+        results['user_query'] = self.user_query
+
+        return results
+
+
+        
+
+
  
-def build_retrieval(user_query, embeddings_path, llm):
+def build_retrieval(user_query, embeddings_path, dataset_path,llm):
     return Retrieval(user_query=user_query,
                      embeddings_path=embeddings_path,
+                     dataset_path=dataset_path,
                      llm=llm)
