@@ -2,6 +2,5 @@ openai
 pyyaml
 pandas
 scikit-learn
-transformers
 numpy
 gradio
