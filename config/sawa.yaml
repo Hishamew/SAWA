@@ -1,3 +1,7 @@
-dataset_path : data/sawa_data_1.csv
-embeddings_path : data/sawa_data_1.npy
+dataset_path : 
+  - data/sawa_data_1.csv
+  - data/sawa_data_2.csv
+embeddings_path : 
+  - data/sawa_data_1.npy
+  - data/sawa_data_2.npy
 openai_config_path : config/openai/openai.yaml
