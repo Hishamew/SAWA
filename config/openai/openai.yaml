@@ -1,4 +1,4 @@
-model: gpt-4-1106-preview
-api_key : sk-jIX3lMObPh1Rbu44Bb2dEeD7347a4998A2E095Ee208cA108
-api_base : https://vip-hk-s1.zeabur.app/v1
-temperature : 1
+model: YOUR_MODEL_CHOICE
+api_key : YOUR_API_KEY
+api_base : YOUR_API_BASE
+temperature : CUSTOM_TEMPERATURE
