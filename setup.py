@@ -5,7 +5,7 @@ with open("README.md",'r') as f:
     
 setup(
     name = "sawa",
-    version = "0.0.4",
+    version = "1.0.0",
     packages = find_packages(),
     long_description=long_description,
     long_description_content_type="text/markdown",
