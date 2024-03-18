@@ -1,0 +1,6 @@
+openai
+pyyaml
+pandas
+scikit-learn
+numpy
+gradio
