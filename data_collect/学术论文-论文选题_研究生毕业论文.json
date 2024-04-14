@@ -1,0 +1,44 @@
+{
+    "generate_text": [
+        {
+            "input": "",
+            "output": "<content>面向基础教育的自适应学习服务系统研究与应用</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>移动互联网时代游客使用社交媒体行为的影响因素研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于图像识别的工业机器人轨迹规划研究与应用</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于凹点检测与PCA混合降维的气液两相流气泡分割重构与流型识别研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>面向复杂产品作业流程仿真的扩展场景图构建与解析技术及其应用研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于Selenium的OpenStackHorizon自动化测试平台的设计与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于Linux系统与Qt开发框架的虚拟仪表的显示应用研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>无透镜数字全息显微图像超分辨率重建方法及应用研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于HMM的SQL注入攻击威胁评估系统的研究与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于社交网络服务系统后端缓存机制的架构设计与实现</content>"
+        }
+    ]
+}

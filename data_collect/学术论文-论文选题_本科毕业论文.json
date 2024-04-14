@@ -1,0 +1,44 @@
+{
+    "generate_text": [
+        {
+            "input": "",
+            "output": "<content>新兴技术发展中的法律挑战与对策研究，如人工智能、区块链等</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于移动智能终端的医疗服务系统设计与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>论底层世界中的人性光辉与生命特质——以电影《三峡好人》为例</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>浅析汉字字形的历史演变过程————以“龙”字为例</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>大数据在教育中的应用与挑战研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于Node和Vue的学生成绩管理系统设计与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于uni-app的教育机构报名管理系统的设计与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于Web的蛋糕甜点店系统的设计与实现</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>知识经济时代无形资产会计核算问题研究</content>"
+        },
+        {
+            "input": "",
+            "output": "<content>基于opencv的人脸识别智能考勤管理系统</content>"
+        }
+    ]
+}
