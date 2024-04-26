@@ -1,0 +1,99 @@
+{
+    "generate_text": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "outline",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+        
+    ],
+    "generate_abstract": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "abstract",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+        
+    ],
+    "generate_intro": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "introduction",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+ 
+    ],
+    "generate_survey": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "survey",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+       
+    ],
+    "generate_methodology": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "methodology",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+        
+    ],
+    "generate_experiment": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "experiment",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+        
+    ],
+    "generate_discussion": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "discussion",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+
+    ],
+    "generate_conclusion": [
+        {
+            "title": "Dynamics of Translation of Single mRNA Molecules In Vivo",
+            "tl;dr": "",         // 如无则不填
+            "abstract": "abstract",
+            "keywords": "keywords",   // 如无则不填
+            "section": "conclusion",
+            "input": "",         // 空着不填
+            "output": "output",     // 素材内容
+        },
+
+    ]
+    
+}
