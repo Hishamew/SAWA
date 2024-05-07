@@ -1,0 +1,46 @@
+{
+    "generate_objectives": [
+        {
+            "input": "",         
+            "output": "To increase the company revenue in the next two quarters. After you have laid out the objective, the next step is to set the key results to achieve the set objective. For this example, there are three key results."    
+        },
+        {
+            "input": "",         
+            "output": "To design and create electric cars that offer the highest environmental value to consumers."    
+        }, 
+        {
+            "input": "",         
+            "output": " To win the Championship."    
+        },
+        {
+            "input": "",         
+            "output": "Build a website for my freelance web designing business."   
+        },
+        {
+            "input": "",         
+            "output": "Improve your employee satisfaction."   
+        }
+    ],
+    "generate_key_results": [
+        {
+            "input": "",          
+            "output": "Key Result 1: Employ five more salespeople to help out the sales department \n Key Result 2: Sell over 1,000 units of products monthly \n Key Result 3: Secure more long-term subscribers for the product"      
+        },
+        {
+            "input": "",          
+            "output": "Key Result 1: By 2024, 100% of Chevrolet products will use an electric motor instead of diesel or petroleum. \n Key Result 2: To be the leading electric car producer in the American subregion by 2029."      
+        },
+        {
+            "input": "",          
+            "output": "Key Result 1: Win an average of 2 points per game throughout the soccer season. \n Ket Result 2: Average a goal difference of 2 or more goals per match throughout the soccer season. \n Key Result 3: Have an average possession of 60% per game."      
+        },
+        {
+            "input": "",          
+            "output": "Key Result 1: Research and purchase or get a free domain name by March 31. \n Key Result 2: Write 10+ blog posts of your website with an SEO strategy and publish by April 14. \n  Key Result 3: Promote your website on your social media platforms and use ads by April 15. \n Key Result 4: Get your first web design job from a client by April 30."      
+        },
+        {
+            "input": "",         
+            "output": "Key Result 1: Enroll 90%+ of your employees into a better benefits package. \n  Key Result 2: Move employee satisfaction score from 6.0 to 9.0"   
+        }
+    ]
+}
