@@ -1,0 +1,24 @@
+{
+    "generate_text": [
+        {
+            "input": "",
+            "output": "🥁 Llama3 is out 🥁\n8B and 70B models available today.\n8k context length.\nTrained with 15 trillion tokens on a custom-built 24k GPU cluster.\nGreat performance on various benchmarks, with Llam3-8B doing better than Llama2-70B in some cases.\nMore versions are coming over the next few months.\n\nhttps://llama.meta.com/llama3/"
+        },
+        {
+            "input": "",
+            "output": "I have been working on vision+language models (VLMs) for a decade. \nAnd every few years, this community re-discovers the same lesson -- that on difficult tasks, VLMs regress to being nearly blind! \nVisual content provides minor improvement to a VLM over an LLM, even when these are questions about visual content. Language does not contain the answer, only vision does. \nWhy? Because language provides easy priors about the world and 'seeing' is hard. \nDoesn't matter if the VLM is GPT-4V or Claude or Gemini. \nAlways happy to burst the bubble of hype!"
+        },
+        {
+            "input": "",
+            "output": "Elevate your #GalaxyAI experience. The #GalaxyBuds2Pro, #GalaxyBuds2 and #GalaxyBudsFE, when paired with your Galaxy smartphone, lowers the language barrier during face-to-face conversations and phone calls.\n\n#Samsung"
+        },
+        {
+            "input": "",
+            "output": "Here are a few essential news updates on the gold and silver market as of May 6, 2024\nShare if you found it informative!\nWant to stay updated on movements in the bullion industry?\nFollow us and get the most insightful weekly updates!\n#ashokaglobal #weeklyoutlook #weeklynews"
+        },
+        {
+            "input": "",
+            "output": "There is no question: The act will force a shutdown of TikTok by Jan. 19, 2025.\nTikTok announced it has officially sued the US Government over the ‘TikTok ban’ bill, calling it “unconstitutional”"
+        }
+    ]
+}
